@@ -18,7 +18,7 @@ class OptimusPrimeServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->app->bind('Mosaiqo\OptimusPrime\Contracts\Transformer', 'Mosaiqo\OptimusPrime\Transformer');
 	}
 
 	/**
