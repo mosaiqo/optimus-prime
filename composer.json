@@ -1,0 +1,20 @@
+{
+    "name": "mosaiqo/optimus-prime",
+    "description": "",
+    "authors": [
+        {
+            "name": "Boudy de Geer",
+            "email": "boudydegeer@mosaiqo.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Mosaiqo\\OptimusPrime": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
