@@ -1,24 +1,20 @@
 <?php namespace {{ namespace }};
 
-class {{ name }} {
+use Mosaiqo\OptimusPrime\Transformer;
+use Mosaiqo\OptimusPrime\Contracts\Transformer;
 
-    {{# properties }}
-    /**
-     * @var string
-     */
-    public ${{ . }};
+class {{ name }} extends Transformer implements Transformer{
 
-    {{/ properties}}
     /**
-     {{# properties }}
-     * @param string {{ . }}
-     {{/ properties }}
+     * @param array $entity
      */
-    public function __construct({{ arguments }})
+    public function transform(array $entity)
     {
+			return [
         {{# properties}}
-        $this->{{ . }} = ${{ . }};
+        {{ . }} = $entity['{{ . }}'];
         {{/ properties}}
+        ];
     }
 
 }
