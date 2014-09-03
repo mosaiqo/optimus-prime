@@ -1,10 +1,10 @@
 <?php namespace Mosaiqo\OptimusPrime\Contracts;
 
 /**
- * Interface Transformer
+ * Interface Autobots
  * @package Mosaiqo\OptimusPrime\Contracts
  */
-interface Transformer {
+interface Autobots {
 
 	/**
 	 * Iterates whether a collection or an

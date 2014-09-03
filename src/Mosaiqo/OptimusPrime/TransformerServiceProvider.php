@@ -2,7 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class OptimusPrimeServiceProvider extends ServiceProvider {
+class TransformerServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -19,6 +19,22 @@ class OptimusPrimeServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->app->bind('Mosaiqo\OptimusPrime\Contracts\Transformer', 'Mosaiqo\OptimusPrime\Transformer');
+		$this->registerArtisanCommand();
+	}
+
+	/**
+	 * Register the Artisan command
+	 *
+	 * @return void
+	 */
+	public function registerArtisanCommand()
+	{
+		$this->app->bindShared('optimus-prime.transformer.make', function($app)
+		{
+			return $app->make('Mosaiqo\OptimusPrime\Console\TransformerGenerate');
+		});
+
+		$this->commands('optimus-prime.transformer.make');
 	}
 
 	/**

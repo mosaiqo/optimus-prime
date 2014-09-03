@@ -1,0 +1,21 @@
+<?php namespace {{ namespace }};
+
+use Mosaiqo\OptimusPrime\Transformer;
+use Mosaiqo\OptimusPrime\Contracts\Autobots;
+
+class {{ name }} extends Transformer implements Autobots{
+
+    /**
+     * @param array $entity
+     * @return array
+     */
+    public function transform(array $entity)
+    {
+			return [
+        {{# properties}}
+        '{{ . }}' =>$entity['{{ . }}'],
+        {{/ properties}}
+       ];
+    }
+
+}
