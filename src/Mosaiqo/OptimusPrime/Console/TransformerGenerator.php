@@ -23,8 +23,10 @@ class TransformerGenerator
 
 	public function make($input, $template, $destination)
 	{
-		$this->file->get('transformer.stub');
-		$this->mustache->render("template", "Acme\Bar\SomeTransformer");
-		$this->file->put("app/Acme/Bar/SomeTransformer.php", "stub");
+		$template = $this->file->get($template);
+
+		$stub = $this->mustache->render($template, $input);
+
+		$this->file->put($destination, $stub);
 	}
 }

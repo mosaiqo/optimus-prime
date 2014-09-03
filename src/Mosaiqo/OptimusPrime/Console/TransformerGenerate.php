@@ -47,9 +47,9 @@ class TransformerGenerate extends Command {
 		$properties = $this->option('properties');
 		$base = $this->option('base');
 
-		$input = $this->parse($path);
+		$input = $this->parse($path, $properties);
 
-//		$this->generator->make($input, $this->getTemplate(), $this->getDestination($base, $path));
+		$this->generator->make($input, $this->getTemplate(), $this->getDestination($base, $path));
 
 		$this->info($this->getThemeSong());
 	}
@@ -69,16 +69,23 @@ class TransformerGenerate extends Command {
 	 */
 	public function getTemplate()
 	{
-		return __DIR__ . 'stubs/transformer.stub';
+		return __DIR__ . '/stubs/transformer.stub';
 	}
 
 	/**
 	 * @param $path
+	 * @param $properties
 	 * @return mixed
 	 */
-	public function parse($path)
+	public function parse($path, $properties)
 	{
-		return $path;
+		$segments = explode('\\', str_replace('/', '\\',$path));
+		$name = array_pop($segments);
+		$namespace = implode('\\', $segments);
+
+		$properties = preg_split('/ ?, ?/', $properties, null, PREG_SPLIT_NO_EMPTY);
+
+		return compact('name','namespace','properties');
 	}
 
 	/**
