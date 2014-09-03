@@ -1,12 +1,13 @@
 <?php namespace Mosaiqo\OptimusPrime;
 
 use Exception;
+use Mosaiqo\OptimusPrime\Contracts\Autobots;
 
 /**
  * Class Transformer
  * @package Mosaiqo\OptimusPrime
  */
-abstract class Transformer
+abstract class Transformer implements Autobots
 {
 
 	/**
