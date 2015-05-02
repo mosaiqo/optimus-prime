@@ -1,9 +1,6 @@
-<?php
-
-use Mosaiqo\OptimusPrime\Transformable;
+<?php namespace Mosaiqo\OptimusPrime;
 
 class TransformableStub
 {
 	use Transformable;
-
 }
