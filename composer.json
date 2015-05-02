@@ -11,12 +11,12 @@
     "php": ">=5.4.0",
     "illuminate/support": "~5.0",
     "illuminate/filesystem": "~5.0",
-    "mustache/mustache": "~2.6",
-    "laravel/elixir": "^1.0@dev"
+    "mustache/mustache": "~2.6"
   },
   "require-dev": {
     "phpspec/phpspec": "master-dev",
-    "codeception/codeception": "master-dev"
+    "codeception/codeception": "master-dev",
+    "laravel/elixir": "^1.0@dev"
   },
   "autoload": {
     "psr-0": {
