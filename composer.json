@@ -16,7 +16,7 @@
   "require-dev": {
     "phpspec/phpspec": "master-dev",
     "codeception/codeception": "master-dev",
-    "laravel/elixir": "^1.0@dev"
+    "laravel/elixir": "dev-master"
   },
   "autoload": {
     "psr-0": {
