@@ -14,6 +14,13 @@ interface Decepticons
 	 */
 	public function getTransformer();
 
+
+	/**
+	 * Auto transforms the model, calling the transformer class.
+	 * @return mixed
+	 */
+	public function transform();
+
 	/**
 	 * Sets the transformer class name
 	 *
