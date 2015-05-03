@@ -34,6 +34,26 @@ trait Transformable
 
 	public function transform()
 	{
+		$transformer = $this->getTransformerClass();
+
+		return $transformer->transform( $this->toArray() );
+	}
+
+	/**
+	 * Creates the transformer class name in base
+	 * of the current class name.
+	 */
+	private function createQualifiedTransformerClass()
+	{
+		$reflection                = new ReflectionClass( __CLASS__ );
+		$name                      = $reflection->getName();
+		$qualifiedTransformerClass = $name . "Transformer";
+
+		$this->setTransformer( $qualifiedTransformerClass );
+	}
+
+	public function getTransformerClass()
+	{
 		if ( ! $this->getTransformer() )
 		{
 			$this->createQualifiedTransformerClass();
@@ -55,22 +75,6 @@ trait Transformable
 			throw new InvalidArgumentException( "The method 'transform' must exist in class {$className}." );
 		}
 
-		return $transformer->transform( $this->toArray() );
+		return $transformer;
 	}
-
-
-	/**
-	 * Creates the transformer class name in base
-	 * of the current class name.
-	 */
-	private function createQualifiedTransformerClass()
-	{
-		$reflection                = new ReflectionClass( __CLASS__ );
-		$name                      = $reflection->getName();
-		$qualifiedTransformerClass = $name . "Transformer";
-
-		$this->setTransformer( $qualifiedTransformerClass );
-	}
-
-
 }
