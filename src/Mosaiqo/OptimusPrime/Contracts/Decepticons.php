@@ -2,10 +2,6 @@
 
 interface Decepticons
 {
-	/**
-	 * boots up the trait.
-	 */
-	public function bootTransformable();
 
 	/**
 	 * Gets the transformer class name

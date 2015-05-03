@@ -10,28 +10,10 @@ use Symfony\Component\Process\Exception\InvalidArgumentException;
  */
 trait Transformable
 {
-	/**
-	 * The name of the class for the transformer
-	 * who will handle the transformation.
-	 *
-	 * @var
-	 */
-	public $transformer;
-
-	/**
-	 * boots up the trait.
-	 */
-	public function bootTransformable()
-	{
-		if ( ! $this->getTransformer() )
-		{
-			$this->createQualifiedTransformerClass();
-		}
-
-	}
 
 	/**
 	 * Gets the transformer class name
+	 *
 	 * @return mixed
 	 */
 	public function getTransformer()
@@ -41,6 +23,7 @@ trait Transformable
 
 	/**
 	 * Sets the transformer class name
+	 *
 	 * @param $transformerClass
 	 */
 	public function setTransformer( $transformerClass )
@@ -51,24 +34,10 @@ trait Transformable
 
 	public function transform()
 	{
-		$className = $this->getTransformer();
-		if(!class_exists($className))
-		{
-			throw new InvalidArgumentException('The class {$className} does not exist.');
-		}
+		$transformer = $this->getTransformerClass();
 
-		app()->bind('transformer', $className);
-		$transformer = app()->make('transformer');
-		if(!method_exists($transformer, 'transform'))
-		{
-			throw new InvalidArgumentException( 'The method "transform" musst exist in class {$className}.' );
-		}
-
-		return $transformer->transform($this);
-
+		return $transformer->transform( $this->toArray() );
 	}
-
-
 
 	/**
 	 * Creates the transformer class name in base
@@ -76,14 +45,36 @@ trait Transformable
 	 */
 	private function createQualifiedTransformerClass()
 	{
-		$reflection = new ReflectionClass( __CLASS__ );
-		$name = $reflection->getName();
+		$reflection                = new ReflectionClass( __CLASS__ );
+		$name                      = $reflection->getName();
 		$qualifiedTransformerClass = $name . "Transformer";
 
 		$this->setTransformer( $qualifiedTransformerClass );
 	}
 
+	public function getTransformerClass()
+	{
+		if ( ! $this->getTransformer() )
+		{
+			$this->createQualifiedTransformerClass();
+		}
 
+		$className = $this->getTransformer();
 
+		if ( ! class_exists( $className ) )
+		{
+			throw new InvalidArgumentException( "The class {$className} does not exist." );
+		}
 
+		app()->bind( 'transformer', $className );
+
+		$transformer = app()->make( 'transformer' );
+
+		if ( ! method_exists( $transformer, 'transform' ) )
+		{
+			throw new InvalidArgumentException( "The method 'transform' must exist in class {$className}." );
+		}
+
+		return $transformer;
+	}
 }
