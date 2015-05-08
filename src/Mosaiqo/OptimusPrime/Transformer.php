@@ -29,11 +29,11 @@ abstract class Transformer implements Autobots
 	 * Abstract method to transform each item in the collection,
 	 * you need to implement this in your inherited class.
 	 *
-	 * @param array $item
+	 * @param $item
 	 * @throws Exception
 	 * @return mixed
 	 */
-	public function transform(array $item)
+	public function transform($item)
 	{
 		throw new Exception("You have to implement your own transform method");
 	}
