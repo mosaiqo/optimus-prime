@@ -19,8 +19,8 @@ interface Autobots {
 	 * Abstract method to transform each item in the collection,
 	 * you need to implement this in your inherited class.
 	 *
-	 * @param array $item
+	 * @param $item
 	 * @return mixed
 	 */
-	public function transform(array $item);
+	public function transform($item);
 }

@@ -36,7 +36,7 @@ trait Transformable
 	{
 		$transformer = $this->getTransformerClass();
 
-		return $transformer->transform( $this->toArray() );
+		return $transformer->transform( $this );
 	}
 
 	/**
