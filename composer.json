@@ -9,7 +9,7 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "illuminate/support": "~5.0",
+    "illuminate/support": "^5.1",
     "illuminate/filesystem": "~5.0",
     "mustache/mustache": "~2.6"
   },
@@ -23,5 +23,5 @@
       "Mosaiqo\\OptimusPrime": "src/"
     }
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "stable"
 }

@@ -11,6 +11,8 @@ use Symfony\Component\Process\Exception\InvalidArgumentException;
 trait Transformable
 {
 
+	protected $_defaultTransformer;
+
 	/**
 	 * Gets the transformer class name
 	 *
@@ -18,6 +20,16 @@ trait Transformable
 	 */
 	public function getTransformer()
 	{
+
+		if (!property_exists($this , 'transformer') ||  !$this->transformer )
+		{
+			if(!$this->_defaultTransformer )
+			{
+				$this->createQualifiedTransformerClass();
+			}
+			return $this->_defaultTransformer;
+		}
+
 		return $this->transformer;
 	}
 
@@ -25,13 +37,20 @@ trait Transformable
 	 * Sets the transformer class name
 	 *
 	 * @param $transformerClass
+	 *
+	 * @return $this
 	 */
 	public function setTransformer( $transformerClass )
 	{
-		$this->transformer = $transformerClass;
+		$this->_defaultTransformer = $transformerClass;
+
+		return $this;
 	}
 
 
+	/**
+	 * @return mixed
+	 */
 	public function transform()
 	{
 		$transformer = $this->getTransformerClass();
@@ -52,12 +71,11 @@ trait Transformable
 		$this->setTransformer( $qualifiedTransformerClass );
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getTransformerClass()
 	{
-		if ( ! $this->getTransformer() )
-		{
-			$this->createQualifiedTransformerClass();
-		}
 
 		$className = $this->getTransformer();
 
@@ -67,7 +85,6 @@ trait Transformable
 		}
 
 		app()->bind( 'transformer', $className );
-
 		$transformer = app()->make( 'transformer' );
 
 		if ( ! method_exists( $transformer, 'transform' ) )
